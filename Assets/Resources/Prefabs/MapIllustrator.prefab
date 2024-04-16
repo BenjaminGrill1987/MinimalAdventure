@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5879325214410936597}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.335312, y: 6.382835, z: -7.4160156}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4781277305810935175
 MonoBehaviour:
@@ -44,9 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
-  overWorldMap: {fileID: 0}
-  tile:
-  - {fileID: 11400000, guid: 824d6b7f6ad6eb44ca5ee33e3b41b666, type: 2}
-  - {fileID: 11400000, guid: f0afccd13c4d7e64baace6bec1d2f20b, type: 2}
-  - {fileID: 11400000, guid: 9e3e7346bbc951c44860c8e08e752f85, type: 2}
-  - {fileID: 11400000, guid: d23521c77400e2944b20f891e8ab8b7b, type: 2}
+  _overWorldMap: {fileID: 0}
+  _forestMap: {fileID: 0}
+  _citiesMap: {fileID: 0}
+  _mountainMap: {fileID: 0}
+  _tile: []

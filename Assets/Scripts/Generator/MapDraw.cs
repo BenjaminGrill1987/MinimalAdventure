@@ -6,6 +6,7 @@ public class MapDraw : Singleton<MapDraw>
 {
     [SerializeField] Tilemap _overWorldMap, _forestMap, _citiesMap, _mountainMap;
     [SerializeField] List<TileBase> _tile;
+    [SerializeField] GameObject _mapEvent;
 
     public static Tilemap MountainMap { get => Instance._mountainMap; }
 
@@ -39,6 +40,7 @@ public class MapDraw : Singleton<MapDraw>
                     case 3:
                         {
                             _forestMap.SetTile(pos, _tile[3]);
+                            var tile = _forestMap.GetTile(pos);
                             break;
                         }
                         default:

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4588044411608000029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.8983417, y: 1.4939622, z: -8.414965}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 8793405113737539457}
-  _actionText: {fileID: 0}
   _firstSelected: {fileID: 2777838926420219598}
 --- !u!1001 &638131866671000509
 PrefabInstance:
@@ -222,6 +221,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4080106521743924756}
+    - target: {fileID: 8274074389690303548, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6495604698339878772, guid: 2ebb92af9aa3cee4dbefa915062b5b25, type: 3}

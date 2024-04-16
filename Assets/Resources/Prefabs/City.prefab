@@ -106,6 +106,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaceCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 565876923507901954, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4728671894025533177, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
         type: 3}
       propertyPath: m_Pivot.x
@@ -220,6 +225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Cities, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274074389690303548, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
