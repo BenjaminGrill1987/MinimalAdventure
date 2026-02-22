@@ -115,7 +115,7 @@ namespace MinimalAdventure.PlayerInput
             ],
             ""bindings"": [
                 {
-                    ""name"": ""WSAD"",
+                    ""name"": ""WASD"",
                     ""id"": ""4fa900af-d1fc-49d7-886d-dc1a2542219f"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -223,6 +223,17 @@ namespace MinimalAdventure.PlayerInput
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47f97bde-9050-465f-b054-5b02405ca481"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
