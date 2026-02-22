@@ -11,6 +11,7 @@ public abstract class Places : MonoBehaviour
 
     [SerializeField] protected TextMeshProUGUI _placeNameSign;
     [SerializeField] protected GameObject _panel, _firstSelected;
+    [SerializeField] private GossipGenerator _gossipGenerator;
     [SerializeField] private string _nameGroupId;
 
     protected string _placeName;
@@ -26,6 +27,7 @@ public abstract class Places : MonoBehaviour
         }
 
         ApplyPlaceNameToSign();
+        ResolveGossipGenerator();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +35,7 @@ public abstract class Places : MonoBehaviour
         if (GameState.CurrentState == GameStates.Game)
         {
             _panel.SetActive(true);
+            _gossipGenerator?.GenerateGossip(_placeName);
             GameState.TryToChange(GameStates.Places);
             EventSystem.current.SetSelectedGameObject(_firstSelected);
         }
@@ -48,6 +51,17 @@ public abstract class Places : MonoBehaviour
         {
             _placeNameSign.text = _placeName;
         }
+    }
+
+
+    private void ResolveGossipGenerator()
+    {
+        if (_gossipGenerator != null || _panel == null)
+        {
+            return;
+        }
+
+        _gossipGenerator = _panel.GetComponentInChildren<GossipGenerator>(true);
     }
 
     private string ResolveGroupKey()

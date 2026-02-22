@@ -2685,6 +2685,7 @@ GameObject:
   - component: {fileID: 7897990976864495364}
   - component: {fileID: 5189874136555482151}
   - component: {fileID: 372490647919581795}
+  - component: {fileID: 7083869226223407861}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2810,6 +2811,34 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7083869226223407861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037087273419479658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49ea484f221432f97dc853fd0295bf6, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: ""
+  _gossipText: {fileID: 372490647919581795}
+  _gossipTemplates:
+  - In {place} sagt man, dass heute Nacht ein Geheimgang geoeffnet wird.
+  - Zwischen den Tavernen von {place} kursiert das Geruecht ueber einen verlorenen Ring.
+  - Ein Haendler schwoert, dass bei {place} {subject} gesichtet wurde.
+  - Die Leute in {place} fluestern, dass der Buergermeister ein Doppelleben fuehrt.
+  - Vor den Toren von {place} soll bald ein grosses Turnier stattfinden.
+  - Man erzaehlt, dass {subject} den Markt in {place} unsicher macht.
+  - Im Schatten von {place} wurden alte Runen entdeckt.
+  - Ein Reisender behauptet, in {place} gebe es eine Karte zu vergessenen Ruinen.
+  _subjects:
+  - eine maskierte Diebesbande
+  - ein wandernder Alchemist
+  - eine goldene Kutsche ohne Fahrer
+  - ein Wolf mit leuchtenden Augen
+  - eine verschollene Ritterin
 --- !u!1 &5074987280666553327
 GameObject:
   m_ObjectHideFlags: 0
