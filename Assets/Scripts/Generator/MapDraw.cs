@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class MapDraw : Singleton<MapDraw>
 {
-    [SerializeField] Tilemap _overWorldMap, _forestMap, _citiesMap, _mountainMap;
+    [SerializeField] Tilemap _overWorldMap, _forestMap, _citiesMap, _mountainMap, _pathMap;
     [SerializeField] List<TileBase> _tile;
     [SerializeField] GameObject _mapEvent;
 
@@ -43,7 +43,13 @@ public class MapDraw : Singleton<MapDraw>
                             var tile = _forestMap.GetTile(pos);
                             break;
                         }
-                        default:
+                    case 4:
+                        {
+                            _pathMap.SetTile(pos, _tile[4]);
+                            var tile = _pathMap.GetTile(pos);
+                            break;
+                        }
+                    default:
                         {
                             break;
                         }
