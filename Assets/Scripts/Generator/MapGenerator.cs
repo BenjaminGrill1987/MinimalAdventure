@@ -25,6 +25,7 @@ public class MapGenerator : MonoBehaviour
             GenerateMap();
             RenumberArray();
             DrawMap();
+            GeneratePaths();
             _startButton.interactable = true;
             MapHandler.SetOverworldMap(_mapArray);
         }
@@ -161,6 +162,150 @@ public class MapGenerator : MonoBehaviour
                         }
                 }
             }
+        }
+    }
+
+    private void GeneratePaths()
+    {
+        List<List<Vector2Int>> cityGroups = GetCityGroups();
+        List<Vector2Int> largeCityCenters = new List<Vector2Int>();
+
+        foreach (List<Vector2Int> cityGroup in cityGroups)
+        {
+            if (cityGroup.Count > 1)
+            {
+                largeCityCenters.Add(GetCityCenter(cityGroup));
+            }
+        }
+
+        if (largeCityCenters.Count < 2)
+        {
+            return;
+        }
+
+        for (int i = 0; i < largeCityCenters.Count; i++)
+        {
+            int nearestIndex = GetNearestCityIndex(largeCityCenters, i);
+            if (nearestIndex >= 0)
+            {
+                DrawPath(largeCityCenters[i], largeCityCenters[nearestIndex]);
+            }
+        }
+    }
+
+    private List<List<Vector2Int>> GetCityGroups()
+    {
+        int width = _mapArray.GetLength(0);
+        int height = _mapArray.GetLength(1);
+        bool[,] visited = new bool[width, height];
+        List<List<Vector2Int>> cityGroups = new List<List<Vector2Int>>();
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (visited[x, y] || _mapArray[x, y] != 2)
+                {
+                    continue;
+                }
+
+                List<Vector2Int> group = new List<Vector2Int>();
+                Queue<Vector2Int> queue = new Queue<Vector2Int>();
+                queue.Enqueue(new Vector2Int(x, y));
+                visited[x, y] = true;
+
+                while (queue.Count > 0)
+                {
+                    Vector2Int current = queue.Dequeue();
+                    group.Add(current);
+
+                    TryAddCityNeighbor(queue, visited, current.x + 1, current.y, width, height);
+                    TryAddCityNeighbor(queue, visited, current.x - 1, current.y, width, height);
+                    TryAddCityNeighbor(queue, visited, current.x, current.y + 1, width, height);
+                    TryAddCityNeighbor(queue, visited, current.x, current.y - 1, width, height);
+                }
+
+                cityGroups.Add(group);
+            }
+        }
+
+        return cityGroups;
+    }
+
+    private void TryAddCityNeighbor(Queue<Vector2Int> queue, bool[,] visited, int x, int y, int width, int height)
+    {
+        if (x < 0 || y < 0 || x >= width || y >= height)
+        {
+            return;
+        }
+
+        if (!visited[x, y] && _mapArray[x, y] == 2)
+        {
+            visited[x, y] = true;
+            queue.Enqueue(new Vector2Int(x, y));
+        }
+    }
+
+    private Vector2Int GetCityCenter(List<Vector2Int> cityGroup)
+    {
+        int sumX = 0;
+        int sumY = 0;
+
+        for (int i = 0; i < cityGroup.Count; i++)
+        {
+            sumX += cityGroup[i].x;
+            sumY += cityGroup[i].y;
+        }
+
+        return new Vector2Int(sumX / cityGroup.Count, sumY / cityGroup.Count);
+    }
+
+    private int GetNearestCityIndex(List<Vector2Int> cityCenters, int cityIndex)
+    {
+        int nearestIndex = -1;
+        float nearestDistance = float.MaxValue;
+
+        for (int i = 0; i < cityCenters.Count; i++)
+        {
+            if (i == cityIndex)
+            {
+                continue;
+            }
+
+            float distance = Vector2Int.Distance(cityCenters[cityIndex], cityCenters[i]);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestIndex = i;
+            }
+        }
+
+        return nearestIndex;
+    }
+
+    private void DrawPath(Vector2Int from, Vector2Int to)
+    {
+        int x = from.x;
+        int y = from.y;
+
+        while (x != to.x)
+        {
+            x += x < to.x ? 1 : -1;
+            SetPathTile(x, y);
+        }
+
+        while (y != to.y)
+        {
+            y += y < to.y ? 1 : -1;
+            SetPathTile(x, y);
+        }
+    }
+
+    private void SetPathTile(int x, int y)
+    {
+        if (_mapArray[x, y] != 2)
+        {
+            _pathMap.SetTile(new Vector3Int(x, y), _tile[4]);
         }
     }
 
