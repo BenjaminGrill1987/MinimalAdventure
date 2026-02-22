@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a84435aec98a48f4297b906bd9e75f43, type: 3}
-  m_Name: New Advanced Rule Tile
+  m_Name: path
   m_EditorClassIdentifier: Assembly-CSharp::AdvancedRuleTile
   m_DefaultSprite: {fileID: 0}
   m_DefaultGameObject: {fileID: 0}

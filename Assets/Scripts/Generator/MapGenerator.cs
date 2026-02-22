@@ -9,7 +9,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int _cityChance, _smallCities, _mediumCities, _largeCities, _mountainChance, _forestChance;
 
     [SerializeField] private List<TileBase> _tile;
-    [SerializeField] private Tilemap _overWorldMap, _forestMap, _mountainMap, _citiesMap;
+    [SerializeField] private Tilemap _overWorldMap, _forestMap, _mountainMap, _citiesMap, _pathMap;
     [SerializeField] private Button _startButton;
 
     [SerializeField] private List<Kernel> _kernel;
