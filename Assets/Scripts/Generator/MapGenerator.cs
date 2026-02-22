@@ -18,6 +18,32 @@ public class MapGenerator : MonoBehaviour
     private int[,] _mapArray;
     private bool _permissionGenerate = false;
 
+    private void FitCameraToMap()
+    {
+        if (_mapArray == null)
+        {
+            return;
+        }
+
+        Camera mapCamera = Camera.main;
+        if (mapCamera == null || !mapCamera.orthographic)
+        {
+            return;
+        }
+
+        int width = _mapArray.GetLength(0);
+        int height = _mapArray.GetLength(1);
+
+        float centerX = (width - 1) * 0.5f;
+        float centerY = (height - 1) * 0.5f;
+        mapCamera.transform.position = new Vector3(centerX, centerY, mapCamera.transform.position.z);
+
+        float padding = 1f;
+        float halfHeight = (height * 0.5f) + padding;
+        float halfWidthByAspect = ((width * 0.5f) + padding) / mapCamera.aspect;
+        mapCamera.orthographicSize = Mathf.Max(halfHeight, halfWidthByAspect);
+    }
+
     public void StartGenerator()
     {
         if (_permissionGenerate)
@@ -338,6 +364,7 @@ public class MapGenerator : MonoBehaviour
     public void MapSmall()
     {
         _mapArray = new int[64, 64];
+        FitCameraToMap();
 
         _text.text = "Small";
 
@@ -347,6 +374,7 @@ public class MapGenerator : MonoBehaviour
     public void MapMedium()
     {
         _mapArray = new int[128, 128];
+        FitCameraToMap();
 
         _text.text = "Medium";
 
@@ -356,6 +384,7 @@ public class MapGenerator : MonoBehaviour
     public void MapBig()
     {
         _mapArray = new int[256, 256];
+        FitCameraToMap();
 
         _text.text = "Big";
 
