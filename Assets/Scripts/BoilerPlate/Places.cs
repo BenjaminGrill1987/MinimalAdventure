@@ -9,6 +9,12 @@ public abstract class Places : MonoBehaviour
 
     protected string _placeName;
 
+    protected virtual void Awake()
+    {
+        GeneratePlaceName();
+        ApplyPlaceNameToSign();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (GameState.CurrentState == GameStates.Game)
@@ -20,4 +26,14 @@ public abstract class Places : MonoBehaviour
     }
 
     public abstract void HideInterface();
+
+    protected abstract void GeneratePlaceName();
+
+    private void ApplyPlaceNameToSign()
+    {
+        if (_placeNameSign != null)
+        {
+            _placeNameSign.text = _placeName;
+        }
+    }
 }
