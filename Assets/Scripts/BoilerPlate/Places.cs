@@ -1,5 +1,6 @@
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -62,6 +63,24 @@ public abstract class Places : MonoBehaviour
         }
 
         _gossipGenerator = _panel.GetComponentInChildren<GossipGenerator>(true);
+    }
+
+
+    public static string GetRandomOtherPlaceName(string currentPlaceName)
+    {
+        List<string> knownPlaceNames = GeneratedNamesByGroup
+            .Values
+            .Where(name => !string.IsNullOrWhiteSpace(name))
+            .Distinct()
+            .Where(name => !string.Equals(name, currentPlaceName, System.StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (knownPlaceNames.Count == 0)
+        {
+            return null;
+        }
+
+        return knownPlaceNames[Random.Range(0, knownPlaceNames.Count)];
     }
 
     private string ResolveGroupKey()

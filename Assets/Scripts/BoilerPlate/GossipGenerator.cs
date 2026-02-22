@@ -28,6 +28,14 @@ public class GossipGenerator : MonoBehaviour
         "eine verschollene Ritterin"
     };
 
+    [SerializeField] private string[] _directionHints =
+    {
+        "nördlich von hier",
+        "südlich von hier",
+        "östlich von hier",
+        "westlich von hier",
+        "hinter den alten Hügeln"
+    };
 
     private void Awake()
     {
@@ -77,10 +85,19 @@ public class GossipGenerator : MonoBehaviour
     {
         string template = _gossipTemplates[Random.Range(0, _gossipTemplates.Length)];
         string subject = _subjects.Length > 0 ? _subjects[Random.Range(0, _subjects.Length)] : "etwas Seltsames";
+        string otherPlaceName = Places.GetRandomOtherPlaceName(placeName);
+        string directionHint = _directionHints.Length > 0
+            ? _directionHints[Random.Range(0, _directionHints.Length)]
+            : "in der Ferne";
+
+        string placeReplacement = string.IsNullOrWhiteSpace(otherPlaceName)
+            ? directionHint
+            : otherPlaceName;
 
         return template
-            .Replace("{place}", placeName)
-            .Replace("{subject}", subject);
+            .Replace("{place}", placeReplacement)
+            .Replace("{subject}", subject)
+            .Replace("{direction}", directionHint);
     }
 
     private void ClearCurrentGossip()
