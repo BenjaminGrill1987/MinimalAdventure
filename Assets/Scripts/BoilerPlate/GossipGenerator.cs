@@ -5,6 +5,7 @@ public class GossipGenerator : MonoBehaviour
 {
     [SerializeField] private Transform _gossipContent;
     [SerializeField] private GameObject _gossipPanelPrefab;
+    [SerializeField] private string _gossipPanelResourcePath = "Prefabs/GossipPanel";
     [SerializeField] private int _gossipEntriesCount = 4;
     [SerializeField] private string[] _gossipTemplates =
     {
@@ -27,8 +28,22 @@ public class GossipGenerator : MonoBehaviour
         "eine verschollene Ritterin"
     };
 
+
+    private void Awake()
+    {
+        if (_gossipPanelPrefab == null && !string.IsNullOrWhiteSpace(_gossipPanelResourcePath))
+        {
+            _gossipPanelPrefab = Resources.Load<GameObject>(_gossipPanelResourcePath);
+        }
+    }
+
     public void GenerateGossip(string placeName)
     {
+        if (_gossipPanelPrefab == null && !string.IsNullOrWhiteSpace(_gossipPanelResourcePath))
+        {
+            _gossipPanelPrefab = Resources.Load<GameObject>(_gossipPanelResourcePath);
+        }
+
         if (_gossipContent == null || _gossipPanelPrefab == null || _gossipTemplates.Length == 0)
         {
             return;
@@ -40,9 +55,15 @@ public class GossipGenerator : MonoBehaviour
 
         for (int i = 0; i < entriesToCreate; i++)
         {
-            GameObject gossipPanel = Instantiate(_gossipPanelPrefab, _gossipContent);
-            TMP_Text gossipText = gossipPanel.GetComponentInChildren<TMP_Text>(true);
+            Object created = Instantiate((Object)_gossipPanelPrefab, _gossipContent);
+            GameObject gossipPanel = (created as GameObject) ?? (created as Component)?.gameObject;
 
+            if (gossipPanel == null)
+            {
+                continue;
+            }
+
+            TMP_Text gossipText = gossipPanel.GetComponentInChildren<TMP_Text>(true);
             if (gossipText == null)
             {
                 continue;
