@@ -17,45 +17,55 @@ public class MapDraw : Singleton<MapDraw>
 
     private void DrawMap()
     {
-        var pos = new Vector3Int(0, 0, 0);
+        int[,] overWorld = MapHandler.GetOverworldMap();
+        int width = overWorld.GetLength(0);
+        int height = overWorld.GetLength(1);
+        int tileCount = width * height;
 
-        for (int x = 0; x < MapHandler.GetOverworldMap().GetLength(0); x++)
+        BoundsInt mapBounds = new BoundsInt(0, 0, 0, width, height, 1);
+
+        TileBase[] overWorldTiles = new TileBase[tileCount];
+        TileBase[] mountainTiles = new TileBase[tileCount];
+        TileBase[] cityTiles = new TileBase[tileCount];
+        TileBase[] forestTiles = new TileBase[tileCount];
+        TileBase[] pathTiles = new TileBase[tileCount];
+
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < MapHandler.GetOverworldMap().GetLength(1); y++)
+            for (int y = 0; y < height; y++)
             {
-                pos = new Vector3Int(x, y, 0);
-                _overWorldMap.SetTile(pos, _tile[0]);
-                switch (MapHandler.GetOverworldMap()[x, y])
+                int index = x + (y * width);
+                overWorldTiles[index] = _tile[0];
+
+                switch (overWorld[x, y])
                 {
                     case 1:
-                        {
-                            _mountainMap.SetTile(pos, _tile[1]);
-                            break;
-                        }
+                        mountainTiles[index] = _tile[1];
+                        break;
                     case 2:
-                        {
-                            _citiesMap.SetTile(pos, _tile[2]);
-                            break;
-                        }
+                        cityTiles[index] = _tile[2];
+                        break;
                     case 3:
-                        {
-                            _forestMap.SetTile(pos, _tile[3]);
-                            var tile = _forestMap.GetTile(pos);
-                            break;
-                        }
+                        forestTiles[index] = _tile[3];
+                        break;
                     case 4:
-                        {
-                            _pathMap.SetTile(pos, _tile[4]);
-                            var tile = _pathMap.GetTile(pos);
-                            break;
-                        }
-                    default:
-                        {
-                            break;
-                        }
+                        pathTiles[index] = _tile[4];
+                        break;
                 }
             }
         }
+
+        _overWorldMap.ClearAllTiles();
+        _mountainMap.ClearAllTiles();
+        _citiesMap.ClearAllTiles();
+        _forestMap.ClearAllTiles();
+        _pathMap.ClearAllTiles();
+
+        _overWorldMap.SetTilesBlock(mapBounds, overWorldTiles);
+        _mountainMap.SetTilesBlock(mapBounds, mountainTiles);
+        _citiesMap.SetTilesBlock(mapBounds, cityTiles);
+        _forestMap.SetTilesBlock(mapBounds, forestTiles);
+        _pathMap.SetTilesBlock(mapBounds, pathTiles);
     }
 
     public static TileBase GetOverWorldMapTile(Vector3Int pos)
