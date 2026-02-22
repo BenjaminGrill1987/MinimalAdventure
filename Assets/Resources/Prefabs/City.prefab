@@ -49,6 +49,8 @@ MonoBehaviour:
   _placeNameSign: {fileID: 7339874257528280289}
   _panel: {fileID: 1307249142401256126}
   _firstSelected: {fileID: 5665782037150741489}
+  _gossipGenerator: {fileID: 9166754974791481660}
+  _nameGroupId: 
 --- !u!61 &2162353911340599121
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -288,3 +290,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &9166754974791481660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2288384886414423998, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+    type: 3}
+  m_PrefabInstance: {fileID: 6987091808176508546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49ea484f221432f97dc853fd0295bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GossipGenerator

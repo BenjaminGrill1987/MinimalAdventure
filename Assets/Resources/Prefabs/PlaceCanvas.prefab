@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 8802760472994589574}
   - component: {fileID: 9131010805782670775}
   - component: {fileID: 3542005365885316849}
+  - component: {fileID: 2288384886414423998}
   m_Layer: 5
   m_Name: PlaceCanvas
   m_TagString: Untagged
@@ -622,6 +623,39 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2288384886414423998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565876923507901954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49ea484f221432f97dc853fd0295bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GossipGenerator
+  _gossipContent: {fileID: 4952140502961187792}
+  _gossipPanelPrefab: {fileID: 9191058312195551419, guid: b01c5c19fe841ea47a288c21bd598777,
+    type: 3}
+  _gossipEntriesCount: 4
+  _gossipTemplates:
+  - "In {place} sagt man, dass heute Nacht ein Geheimgang ge\xF6ffnet wird."
+  - "Zwischen den Tavernen von {place} kursiert das Ger\xFCcht \xFCber einen verlorenen
+    Ring."
+  - "Ein H\xE4ndler schw\xF6rt, dass bei {place} {subject} gesichtet wurde."
+  - "Die Leute in {place} fl\xFCstern, dass der B\xFCrgermeister ein Doppelleben
+    f\xFChrt."
+  - "Vor den Toren von {place} soll bald ein gro\xDFes Turnier stattfinden."
+  - "Man erz\xE4hlt, dass {subject} den Markt in {place} unsicher macht."
+  - Im Schatten von {place} wurden alte Runen entdeckt.
+  - Ein Reisender behauptet, in {place} gebe es eine Karte zu vergessenen Ruinen.
+  _subjects:
+  - eine maskierte Diebesbande
+  - ein wandernder Alchemist
+  - eine goldene Kutsche ohne Fahrer
+  - ein Wolf mit leuchtenden Augen
+  - eine verschollene Ritterin
 --- !u!1 &1450516749156378802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,14 +2855,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b49ea484f221432f97dc853fd0295bf6, type: 3}
-  m_Name: ""
-  m_EditorClassIdentifier: ""
+  m_Name: 
+  m_EditorClassIdentifier: 
   _gossipContent: {fileID: 4952140502961187792}
-  _gossipPanelPrefab: {fileID: 100100000, guid: b01c5c19fe841ea47a288c21bd598777, type: 3}
+  _gossipPanelPrefab: {fileID: 100100000, guid: b01c5c19fe841ea47a288c21bd598777,
+    type: 3}
   _gossipEntriesCount: 4
   _gossipTemplates:
   - In {place} sagt man, dass heute Nacht ein Geheimgang geoeffnet wird.
-  - Zwischen den Tavernen von {place} kursiert das Geruecht ueber einen verlorenen Ring.
+  - Zwischen den Tavernen von {place} kursiert das Geruecht ueber einen verlorenen
+    Ring.
   - Ein Haendler schwoert, dass bei {place} {subject} gesichtet wurde.
   - Die Leute in {place} fluestern, dass der Buergermeister ein Doppelleben fuehrt.
   - Vor den Toren von {place} soll bald ein grosses Turnier stattfinden.
