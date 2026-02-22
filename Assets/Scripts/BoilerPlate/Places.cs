@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 public abstract class Places : MonoBehaviour
 {
     private static readonly Dictionary<string, string> GeneratedNamesByGroup = new Dictionary<string, string>();
+    private static readonly Dictionary<int, int[,]> ComponentMapsByTileValue = new Dictionary<int, int[,]>();
+    private static int[,] _cachedMapReference;
 
     [SerializeField] protected TextMeshProUGUI _placeNameSign;
     [SerializeField] protected GameObject _panel, _firstSelected;
@@ -55,7 +57,132 @@ public abstract class Places : MonoBehaviour
             return $"{GetType().Name}:{_nameGroupId}";
         }
 
-        Transform groupRoot = transform.parent != null ? transform.parent : transform;
-        return $"{GetType().Name}:auto:{groupRoot.GetInstanceID()}";
+        if (TryGetMapGroupKey(out string mapGroupKey))
+        {
+            return mapGroupKey;
+        }
+
+        Vector3 position = transform.position;
+        int x = Mathf.RoundToInt(position.x);
+        int y = Mathf.RoundToInt(position.y);
+        return $"{GetType().Name}:tile:{x}:{y}";
+    }
+
+    private bool TryGetMapGroupKey(out string key)
+    {
+        key = default;
+        int[,] map = MapHandler.GetOverworldMap();
+        if (map == null)
+        {
+            return false;
+        }
+
+        if (!TryGetTileCoordinate(map, out int x, out int y))
+        {
+            return false;
+        }
+
+        int targetTileValue = GetGroupingTileValue();
+        if (map[x, y] != targetTileValue)
+        {
+            return false;
+        }
+
+        RefreshComponentCacheIfNeeded(map);
+
+        if (!ComponentMapsByTileValue.TryGetValue(targetTileValue, out int[,] componentMap))
+        {
+            componentMap = BuildComponentMap(map, targetTileValue);
+            ComponentMapsByTileValue[targetTileValue] = componentMap;
+        }
+
+        int componentId = componentMap[x, y];
+        if (componentId <= 0)
+        {
+            return false;
+        }
+
+        key = $"{GetType().Name}:map:{targetTileValue}:{componentId}";
+        return true;
+    }
+
+    private bool TryGetTileCoordinate(int[,] map, out int x, out int y)
+    {
+        Vector3 position = transform.position;
+        x = Mathf.RoundToInt(position.x);
+        y = Mathf.RoundToInt(position.y);
+
+        int width = map.GetLength(0);
+        int height = map.GetLength(1);
+        return x >= 0 && y >= 0 && x < width && y < height;
+    }
+
+    protected virtual int GetGroupingTileValue()
+    {
+        return 2;
+    }
+
+    private void RefreshComponentCacheIfNeeded(int[,] map)
+    {
+        if (ReferenceEquals(_cachedMapReference, map))
+        {
+            return;
+        }
+
+        _cachedMapReference = map;
+        ComponentMapsByTileValue.Clear();
+    }
+
+    private int[,] BuildComponentMap(int[,] map, int targetValue)
+    {
+        int width = map.GetLength(0);
+        int height = map.GetLength(1);
+        int[,] componentMap = new int[width, height];
+        int componentId = 0;
+
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (map[x, y] != targetValue || componentMap[x, y] != 0)
+                {
+                    continue;
+                }
+
+                componentId++;
+                componentMap[x, y] = componentId;
+                queue.Enqueue(new Vector2Int(x, y));
+
+                while (queue.Count > 0)
+                {
+                    Vector2Int current = queue.Dequeue();
+
+                    TryVisitNeighbor(map, componentMap, targetValue, componentId, queue, current.x + 1, current.y, width, height);
+                    TryVisitNeighbor(map, componentMap, targetValue, componentId, queue, current.x - 1, current.y, width, height);
+                    TryVisitNeighbor(map, componentMap, targetValue, componentId, queue, current.x, current.y + 1, width, height);
+                    TryVisitNeighbor(map, componentMap, targetValue, componentId, queue, current.x, current.y - 1, width, height);
+                }
+            }
+        }
+
+        return componentMap;
+    }
+
+    private void TryVisitNeighbor(int[,] map, int[,] componentMap, int targetValue, int componentId, Queue<Vector2Int> queue, int x, int y, int width, int height)
+    {
+        if (x < 0 || y < 0 || x >= width || y >= height)
+        {
+            return;
+        }
+
+        if (map[x, y] != targetValue || componentMap[x, y] != 0)
+        {
+            return;
+        }
+
+        componentMap[x, y] = componentId;
+        queue.Enqueue(new Vector2Int(x, y));
     }
 }
