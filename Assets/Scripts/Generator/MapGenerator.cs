@@ -330,6 +330,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (_mapArray[x, y] != 2)
         {
+            _mapArray[x, y] = 4;
             _pathMap.SetTile(new Vector3Int(x, y), _tile[4]);
         }
     }

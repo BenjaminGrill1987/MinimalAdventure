@@ -1,0 +1,37 @@
+(cd "$(git rev-parse --show-toplevel)" && git apply -p1 <<'EOF'
+diff --git a/Assets/Resources/CharSprite/Char_Test.png b/Assets/Resources/CharSprite/Char_Test.png
+index 8963f0231aa5f3a81afbc06030abade921d0027c..b7c6a94727f316b63f5db37bcd5a97fda00be6fa 100644
+GIT binary patch
+delta 246
+zcmV<S015xh4u%4d7=H)`0001UdV2H#007NNL_t(|+GAiC1*3pOpqUx*A0HmR4uDzU
+zAD4j_)65|Q?f{qtFZNBtz{h4)z%k7nV&UxbAA|`x0H$u#0aSMY%s`k0xG>Fg!GJjc
+z-63apO-I3WF9}yoD?`C_^SMY_?0=~V1sDzhiGk#3o(4b`VQ+H)%waT3{V)q~IRIIX
+zst!T-`KSYkaR5~lBQ^)1rw43uG;;tkmeb4u#9B@h2asYpO&oxZam6{+8>#plfGy5x
+w=75Cy7%(QJ9;R;SI{@8cQXN3CL+IrI0ETM@srLBEO8@`>07*qoM6N<$f_HjhmjD0&
+
+literal 1868
+zcmcIlTTC2P7@qA7C^S}xHIW*pvskS-JD0uAz?R}JbvLq<z*?v^q-ST&?2hct3^N0}
+z5E5EUV~m(IX__?AruFVa)n2sJAU2?4EJkC~;DbI?Qd48&B^DGFQ_t+p#<a+blewHT
+z^PTVi{>%C2>DHEq*R8#4Erwz1!l7Urdg9i#ehs?YzkhWUJ<7DuE(60HcI&cbUTNsV
+zu+@`twA1X2H1mR*asW|{K}RN~AvA{7H)J#*bVC!5!MLpWiJ!*K5x6Y+i4J#!j%Wdx
+zkV6AHY#(Te3Ip8&ClU=?@%jvp2vX1lcqWxp3_jy0vb;PRTdyes&qB;@KhbCz#5*Ic
+zctF)5?sj-cfpM|8mvb;4nqyrL;w;U0DcVahPLgJL+QU0JJbw_#nl4IwTX1{c7Ml5q
+zglTF#MWxeeN80I7^*F_F97oYC#j+$qkVd~^f()q`_5wo?8iFosrmQNs#Ry_*ujwa{
+z(wqw^tw^gF`7oh?Q5m37jDxmZDgYyqrJ<=*5p9@FeaK2)?@ft~Xuk%jHfX55x&WK{
+zpkmq!#zdjGR_oQ1Sx-fQf=QS{Farr=il(%LYN|#;y@eme&qZ%EKA=Njs(MsalZ8aJ
+z7Fh5=0KdOORzx*zY_as@;V=kH=qFg3rAgX@&M3?9jF)#YwKU7qbPgIpRUiTrEDx-T
+zvedsEXe7di6~hFI0K-8)fkZiES>&CJ;HBMe4=D+;7%4%QlZ;6oFX`l<$LEUC&;!J*
+zF0?+V3cXhFto6B~6;%Oo6yw7Kug^m>G(-BJiy;Bya-$pVBpCp_jO1p77%ddocIYzN
+zHz0W<tEEarj4bd9f)BVzz&aU{kz6s7^LYR%I(>}K?Q^*VK_YNb;3ZX00aPV&3dA9$
+zDRBb-M@>LYs(M5fQOuoIEhBd1MMySK;`;NuqaF6-M@bpamK+ZRtJ3|1V5Jx$?{lx^
+zn?!GUI&<sO35ZCSNPZ4xsFIlmI&6%iNdHG^QMZzAfWD=LFE8!?oA7){g#=LI5VcH-
+zuw0?6=8{VY_3vC|zunM?3UJijtYNXOqDiqaLj_UmsO?r=c<&nwv(e#TV>Gevhr^AP
+z!*oT{M9(ANwpP@N6Nly|b?oYk((^lyY}kDL&f{toXbum3Rnxkw`;B)V{pjSCFE%q3
+z$IphU&UG!8wH!P>wXpNY^4ZbdHu2v5XCl`QUN1Xk^xd}?uN}MC@b&F~^vwLS^2w1w
+zo~!$Oda?T2+!(j}OTK5^m$>cqXU1PTx~=lq)tTSt$CZuuY&$~6KRDI#c;(2UiK&HO
+zubkhL`1r%^rK7VitnS#iV4Hhu{`BC;vmLhjA)8)u;JM}%gVX$CGPnWn9j@OLTJf^<
+z=g(WaN>5<j(;Ih`9>5-(znfZ>DM`3JXV;X~U=LiHeZS<=mae__-+E5gObv18FP0qp
+z>%u4Is<!G)^_T7ICy#2S?^b>4|E%t^{lu9&rW&8vKU(LIOA_Pd-?b0g=dhLKugz4y
+SUH+8yzY90D1mApU&+y-BesO;Q
+EOF
+)
