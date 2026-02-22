@@ -42,6 +42,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4588044411608000029}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -65,7 +66,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -76,7 +78,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &4080106521743924756
@@ -101,10 +102,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9078550460358007492}
     m_Modifications:
+    - target: {fileID: 52957464614859887, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 565876923507901954, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
         type: 3}
       propertyPath: m_Name
       value: PlaceCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 565876923507901954, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 867403302268421004, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
         type: 3}
@@ -115,6 +126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293930086558549602, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4728671894025533177, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
         type: 3}
@@ -216,6 +232,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4833125823657666910, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5662031282678807281, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -224,6 +245,11 @@ PrefabInstance:
     - target: {fileID: 8274074389690303548, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9031141697706491729, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+        type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
