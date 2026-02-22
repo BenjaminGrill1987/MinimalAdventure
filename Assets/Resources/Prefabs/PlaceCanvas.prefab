@@ -2823,7 +2823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49ea484f221432f97dc853fd0295bf6, type: 3}
   m_Name: ""
   m_EditorClassIdentifier: ""
-  _gossipText: {fileID: 372490647919581795}
+  _gossipContent: {fileID: 4952140502961187792}
+  _gossipPanelPrefab: {fileID: 100100000, guid: b01c5c19fe841ea47a288c21bd598777, type: 3}
+  _gossipEntriesCount: 4
   _gossipTemplates:
   - In {place} sagt man, dass heute Nacht ein Geheimgang geoeffnet wird.
   - Zwischen den Tavernen von {place} kursiert das Geruecht ueber einen verlorenen Ring.

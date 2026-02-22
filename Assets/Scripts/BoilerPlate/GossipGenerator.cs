@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class GossipGenerator : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _gossipText;
+    [SerializeField] private Transform _gossipContent;
+    [SerializeField] private GameObject _gossipPanelPrefab;
+    [SerializeField] private int _gossipEntriesCount = 4;
     [SerializeField] private string[] _gossipTemplates =
     {
         "In {place} sagt man, dass heute Nacht ein Geheimgang geöffnet wird.",
@@ -25,28 +27,46 @@ public class GossipGenerator : MonoBehaviour
         "eine verschollene Ritterin"
     };
 
-    private void Awake()
-    {
-        if (_gossipText == null)
-        {
-            _gossipText = GetComponent<TMP_Text>();
-        }
-    }
-
     public void GenerateGossip(string placeName)
     {
-        if (_gossipText == null || _gossipTemplates.Length == 0)
+        if (_gossipContent == null || _gossipPanelPrefab == null || _gossipTemplates.Length == 0)
         {
             return;
         }
 
+        ClearCurrentGossip();
+
+        int entriesToCreate = Mathf.Max(1, _gossipEntriesCount);
+
+        for (int i = 0; i < entriesToCreate; i++)
+        {
+            GameObject gossipPanel = Instantiate(_gossipPanelPrefab, _gossipContent);
+            TMP_Text gossipText = gossipPanel.GetComponentInChildren<TMP_Text>(true);
+
+            if (gossipText == null)
+            {
+                continue;
+            }
+
+            gossipText.text = BuildGossip(placeName);
+        }
+    }
+
+    private string BuildGossip(string placeName)
+    {
         string template = _gossipTemplates[Random.Range(0, _gossipTemplates.Length)];
         string subject = _subjects.Length > 0 ? _subjects[Random.Range(0, _subjects.Length)] : "etwas Seltsames";
 
-        string gossip = template
+        return template
             .Replace("{place}", placeName)
             .Replace("{subject}", subject);
+    }
 
-        _gossipText.text = gossip;
+    private void ClearCurrentGossip()
+    {
+        for (int i = _gossipContent.childCount - 1; i >= 0; i--)
+        {
+            Destroy(_gossipContent.GetChild(i).gameObject);
+        }
     }
 }
