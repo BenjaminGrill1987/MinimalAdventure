@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce652d58c593c046b4b4c21317c897a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _placeNameSign: {fileID: 1004377243439264222}
   _panel: {fileID: 8793405113737539457}
   _firstSelected: {fileID: 2777838926420219598}
 --- !u!1001 &638131866671000509
@@ -258,6 +259,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ebb92af9aa3cee4dbefa915062b5b25, type: 3}
+--- !u!114 &1004377243439264222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 372490647919581795, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
+    type: 3}
+  m_PrefabInstance: {fileID: 638131866671000509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &2777838926420219598 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3339353447006715251, guid: 2ebb92af9aa3cee4dbefa915062b5b25,
