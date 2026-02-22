@@ -42,80 +42,94 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap()
     {
-        for (int x = 0; x < _mapArray.GetLength(0); x++)
+        int width = _mapArray.GetLength(0);
+        int height = _mapArray.GetLength(1);
+
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < _mapArray.GetLength(1); y++)
+            for (int y = 0; y < height; y++)
             {
                 if (_mapArray[x, y] == 0)
                 {
-                    bool setPoint = false;
-
-                    if (Random.Range(0, 100) < _cityChance)
+                    if (TryPlaceCity(x, y, width, height))
                     {
-                        if (x + 1 != _mapArray.GetLength(0) && y + 1 != _mapArray.GetLength(1))
-                        {
-                            bool cityBuild = false;
-                            _mapArray[x, y] = 2;
-                            if (Random.Range(0, 100) < _smallCities)
-                            {
-                                if (Random.Range(0, 100) < 50)
-                                {
-                                    _mapArray[x + 1, y] = 2;
-                                }
-                                else
-                                {
-                                    _mapArray[x, y + 1] = 2;
-                                }
-                                cityBuild = true;
-                            }
-                            if (Random.Range(0, 100) < _mediumCities && !cityBuild)
-                            {
-                                if (Random.Range(0, 100) < 25)
-                                {
-                                    _mapArray[x, y + 1] = 2;
-                                    _mapArray[x + 1, y] = 2;
-                                    cityBuild = true;
-                                }
-                                if (Random.Range(0, 100) < 25 && !cityBuild)
-                                {
-                                    _mapArray[x, y + 1] = 2;
-                                    _mapArray[x, y + 1] = 2;
-                                    cityBuild = true;
-                                }
-                                if (!cityBuild)
-                                {
-                                    _mapArray[x + 1, y] = 2;
-                                    _mapArray[x + 1, y + 1] = 2;
-                                    cityBuild = true;
-                                }
-                            }
-                            if (Random.Range(0, 100) < _largeCities && !cityBuild)
-                            {
-                                _mapArray[x + 1, y] = 2;
-                                _mapArray[x + 1, y + 1] = 2;
-                                _mapArray[x, y + 1] = 2;
-                            }
-
-                        }
-                        setPoint = true;
+                        continue;
                     }
-                    if (Random.Range(0, 100) < _mountainChance && !setPoint)
+
+                    if (Random.Range(0, 100) < _mountainChance)
                     {
                         _mapArray[x, y] = 1;
-                        setPoint = true;
+                        continue;
                     }
-                    if (Random.Range(0, 100) < _forestChance && !setPoint)
+
+                    if (Random.Range(0, 100) < _forestChance)
                     {
                         _mapArray[x, y] = 3;
-                        setPoint = true;
-                    }
-                    if (!setPoint)
-                    {
-                        _mapArray[x, y] = 0;
                     }
                 }
             }
         }
+    }
+
+    private bool TryPlaceCity(int x, int y, int width, int height)
+    {
+        if (Random.Range(0, 100) >= _cityChance)
+        {
+            return false;
+        }
+
+        if (x + 1 >= width || y + 1 >= height)
+        {
+            _mapArray[x, y] = 2;
+            return true;
+        }
+
+        _mapArray[x, y] = 2;
+
+        if (Random.Range(0, 100) < _smallCities)
+        {
+            if (Random.Range(0, 100) < 50)
+            {
+                _mapArray[x + 1, y] = 2;
+            }
+            else
+            {
+                _mapArray[x, y + 1] = 2;
+            }
+
+            return true;
+        }
+
+        if (Random.Range(0, 100) < _mediumCities)
+        {
+            int mediumPattern = Random.Range(0, 3);
+            if (mediumPattern == 0)
+            {
+                _mapArray[x, y + 1] = 2;
+                _mapArray[x + 1, y] = 2;
+            }
+            else if (mediumPattern == 1)
+            {
+                _mapArray[x, y + 1] = 2;
+                _mapArray[x + 1, y + 1] = 2;
+            }
+            else
+            {
+                _mapArray[x + 1, y] = 2;
+                _mapArray[x + 1, y + 1] = 2;
+            }
+
+            return true;
+        }
+
+        if (Random.Range(0, 100) < _largeCities)
+        {
+            _mapArray[x + 1, y] = 2;
+            _mapArray[x + 1, y + 1] = 2;
+            _mapArray[x, y + 1] = 2;
+        }
+
+        return true;
     }
 
     void RenumberArray()
@@ -131,38 +145,49 @@ public class MapGenerator : MonoBehaviour
 
     private void DrawMap()
     {
-        Vector3Int pos = new Vector3Int(0, 0);
+        int width = _mapArray.GetLength(0);
+        int height = _mapArray.GetLength(1);
 
-        for (int x = 0; x < _mapArray.GetLength(0); x++)
+        BoundsInt mapBounds = new BoundsInt(0, 0, 0, width, height, 1);
+        int tileCount = width * height;
+
+        TileBase[] overworldTiles = new TileBase[tileCount];
+        TileBase[] mountainTiles = new TileBase[tileCount];
+        TileBase[] cityTiles = new TileBase[tileCount];
+        TileBase[] forestTiles = new TileBase[tileCount];
+
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < _mapArray.GetLength(1); y++)
+            for (int y = 0; y < height; y++)
             {
-                pos = new Vector3Int(x, y);
-                _overWorldMap.SetTile(pos, _tile[0]);
+                int index = x + (y * width);
+                overworldTiles[index] = _tile[0];
+
                 switch (_mapArray[x, y])
                 {
                     case 1:
-                        {
-                            _mountainMap.SetTile(pos, _tile[1]);
-                            break;
-                        }
+                        mountainTiles[index] = _tile[1];
+                        break;
                     case 2:
-                        {
-                            _citiesMap.SetTile(pos, _tile[2]);
-                            break;
-                        }
+                        cityTiles[index] = _tile[2];
+                        break;
                     case 3:
-                        {
-                            _forestMap.SetTile(pos, _tile[3]);
-                            break;
-                        }
-                    default:
-                        {
-                            break;
-                        }
+                        forestTiles[index] = _tile[3];
+                        break;
                 }
             }
         }
+
+        _overWorldMap.ClearAllTiles();
+        _mountainMap.ClearAllTiles();
+        _citiesMap.ClearAllTiles();
+        _forestMap.ClearAllTiles();
+        _pathMap.ClearAllTiles();
+
+        _overWorldMap.SetTilesBlock(mapBounds, overworldTiles);
+        _mountainMap.SetTilesBlock(mapBounds, mountainTiles);
+        _citiesMap.SetTilesBlock(mapBounds, cityTiles);
+        _forestMap.SetTilesBlock(mapBounds, forestTiles);
     }
 
     private void GeneratePaths()
